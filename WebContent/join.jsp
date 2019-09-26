@@ -21,14 +21,18 @@
 </head>
 <body>
     <div class="container">
-        <form action="loginProc.jsp" method="post">
+        <form action="joinProc.jsp" method="post">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
-                <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required>
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input name="pw" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+                <input name="pw" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Name</label>
+                <input name="pw" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

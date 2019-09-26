@@ -29,18 +29,27 @@
 			
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
+				<%
+					if(session.getAttribute("userEmail") == null){
+						%>
 					<li class="nav-item active">
-						<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+						<a class="nav-link" href="join.jsp">Join<span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="login.jsp">Login</a>
+						<a class="nav-link" href="login.jsp">Log in</a>
+					</li>
+						<%
+					} else {
+						%>
+					<li class="nav-item active">
+						<a class="nav-link" href="logout.jsp">Log out<span class="sr-only">(current)</span></a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">이벤트 주최하기</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						dropdown
+						<%= session.getAttribute("userEmail") %>
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="#">Action</a>
@@ -49,6 +58,9 @@
 						<a class="dropdown-item" href="#">Something else here</a>
 						</div>
 					</li>
+					<%
+					}
+				%>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

@@ -32,17 +32,17 @@
 				<%
 					if(session.getAttribute("userEmail") == null){
 						%>
-					<li class="nav-item active">
-						<a class="nav-link" href="join.jsp">Join<span class="sr-only">(current)</span></a>
+					<li class="nav-item">
+						<a class="nav-link" href="0user/join.jsp">Join</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="login.jsp">Log in</a>
+						<a class="nav-link" href="0user/login.jsp">Log in</a>
 					</li>
 						<%
 					} else {
 						%>
-					<li class="nav-item active">
-						<a class="nav-link" href="logout.jsp">Log out<span class="sr-only">(current)</span></a>
+					<li class="nav-item">
+						<a class="nav-link" href="0user/logout.jsp">Log out</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">이벤트 주최하기</a>

@@ -80,7 +80,7 @@
 	try {
 		conn = DB.getConnection();
 		
-		String sql = "SELECT * FROM BOARD";
+		String sql = "SELECT * FROM BOARD ORDER BY boardid DESC";
 		
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();

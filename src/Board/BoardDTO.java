@@ -9,6 +9,8 @@ public class BoardDTO {
 	private String content;
 	private Timestamp starttime;
 	private Timestamp endtime;
+	private byte[] mainimg;
+	
 	public int getUserid() {
 		return userid;
 	}
@@ -45,4 +47,11 @@ public class BoardDTO {
 	public void setEndtime(Timestamp endtime) {
 		this.endtime = endtime;
 	}
+	public byte[] getMainimg() {
+		return mainimg;
+	}
+	public void setMainimg(byte[] mainimg) {
+		this.mainimg = mainimg;
+	}
+	
 }

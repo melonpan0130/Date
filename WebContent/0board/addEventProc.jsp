@@ -13,8 +13,8 @@
 	String start = request.getParameter("starttime");
 	String end = request.getParameter("endtime");
 	String content = request.getParameter("content");
+	byte[] mainimg = request.getParameter("mainimg").getBytes();
 	
-	String datetimeLocal = "1985-04-12T23:20";
 	start += ":00.0";
 	end += ":00.0";
 	Timestamp starttime = Timestamp.valueOf(start.replace("T", " "));
@@ -27,6 +27,7 @@
 	board.setStarttime(starttime);
 	board.setEndtime(endtime);
 	board.setContent(content);
+	board.setMainimg(mainimg);
 	
 	int result = BoardDAO.newBoard(board);
 	

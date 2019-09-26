@@ -7,7 +7,7 @@ import Util.DB;
 
 public class BoardDAO {
 	
-	public int newBoard(BoardDTO board) {
+	public static int newBoard(BoardDTO board) {
 		String sql = "INSERT INTO BOARD(USERID, TITLE, CONTENT, STARTTIME, ENDTIME) VALUE(?, ?, ?, ?, ?)";
 		try {
 			Connection conn = DB.getConnection();

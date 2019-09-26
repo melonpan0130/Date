@@ -1,3 +1,4 @@
+<%@page import="Util.DB"%>
 <%@page import="javax.sql.DataSource"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="javax.naming.Context"%>
@@ -45,7 +46,7 @@
 						<a class="nav-link" href="0user/logout.jsp">Log out</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">이벤트 주최하기</a>
+						<a class="nav-link" href="0board/addEvent.jsp">Add Event</a>
 					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -77,39 +78,34 @@
 	ResultSet rs = null;
 	
 	try {
-		Context initctx = new InitialContext();
-		Context envctx = (Context)initctx.lookup("java:comp/env");
-		DataSource ds = (DataSource)envctx.lookup("jdbc/basicjsp");
-		conn = ds.getConnection();
+		conn = DB.getConnection();
 		
 		String sql = "SELECT * FROM BOARD";
 		
 		pstmt = conn.prepareStatement(sql);
 		rs = pstmt.executeQuery();
-		if(rs.next()){
+		while(rs.next()) {
 			%>
-			<%= rs.getString("title") %>
-			<%
-		}
-		
-		if (false) {
-		%>
-		<div class="col-md-4">
-			<div class="card mb-4 shadow-sm">
-				<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-				<div class="card-body">
-					<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-					<div class="d-flex justify-content-between align-items-center">
-						<div class="btn-group">
-						<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-						<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+			<div class="col-md-4">
+				<div class="card mb-4 shadow-sm">
+					<%if(rs.getBlob("mainimg") != null){%>
+						<img class="bd-placeholder-img card-img-top" width="100%" height="225" />
+				<%	} else { %>
+						<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+				<%	} %>
+					<div class="card-body">
+						<p class="card-text"><%= rs.getString("title") %></p>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+							<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+							<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+							</div>
 						</div>
-						<small class="text-muted">9 mins</small>
 					</div>
 				</div>
 			</div>
-		</div>
-		<%}
+			<%
+		}
 	}catch(Exception e) {
 		e.printStackTrace();
 	}finally {

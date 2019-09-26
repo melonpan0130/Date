@@ -62,4 +62,27 @@ public class UserDAO {
 		}
 		return -1; // DB Error
 	}
+	
+	public static int getUserId(String email) {
+		String sql = "SELECT userid FROM user WHERE email=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DB.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			return rs.getInt("userid");
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null) try{ rs.close(); }catch(Exception e) { e.printStackTrace(); }
+			if(pstmt != null) try{ pstmt.close(); }catch(Exception e) { e.printStackTrace(); }
+			if(conn != null) try{ conn.close(); }catch(Exception e) { e.printStackTrace(); }
+		}
+		return -1; // DB Error
+	}
 }

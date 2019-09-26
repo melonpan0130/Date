@@ -1,3 +1,6 @@
+<%@page import="User.UserDAO"%>
+<%@page import="comments.CommentDAO"%>
+<%@page import="Board.BoardDAO"%>
 <%@page import="Util.DB"%>
 <%@page import="javax.sql.DataSource"%>
 <%@page import="javax.naming.InitialContext"%>
@@ -9,6 +12,8 @@
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
+	int boardid = Integer.parseInt(request.getParameter("boardid"));
+	ResultSet rs = BoardDAO.getBoard(boardid);
 %>
 <!DOCTYPE html>
 <html>
@@ -20,15 +25,12 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
 		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 		<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/litera/bootstrap.min.css" rel="stylesheet" integrity="sha384-D/7uAka7uwterkSxa2LwZR7RJqH2X6jfmhkJ0vFPGUtPyBMF2WMq9S+f9Ik5jJu1" crossorigin="anonymous">
-		<script type="text/javascript">
-			window.onload = function() {
-				
-			}
-		</script>
+		<link rel="stylesheet" href="./bootstrap-datetime-picker/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./bootstrap-datetime-picker/css/shop-item.css">
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="#">Date</a>
+			<a class="navbar-brand" href="../main.jsp">Date</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -74,54 +76,49 @@
 				</form>
 			</div>
 		</nav>
-		<div class="album py-5 bg-light">
-			<div class="container">
-				<div class="row">
-<%
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	
-	try {
-		conn = DB.getConnection();
-		String sql = "SELECT * FROM BOARD ORDER BY boardid DESC";
-		
-		pstmt = conn.prepareStatement(sql);
-		rs = pstmt.executeQuery();
-		while(rs.next()) {
-			%>
-			<a class="col-md-4" href="./0board/viewEvent.jsp?boardid=<%= rs.getInt("boardid")%>" >
-				<div class="card mb-4 shadow-sm">
-					<%if(rs.getBlob("mainimg") != null){%>
-						<img class="bd-placeholder-img card-img-top" width="100%" height="225" />
-				<%	} else { %>
-						<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-				<%	} %>
-					<div class="card-body">
-						<p class="card-text"><%= rs.getString("title") %></p>
-						<div class="d-flex justify-content-between align-items-center">
-							<div class="btn-group">
-							<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-							<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-							</div>
-						</div>
+		<div class="container" style="margin-top: 50px;">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="list-group">
+						<a href="#" class="list-group-item active">Volunteer</a>
+						<a href="#" class="list-group-item">Staff</a>
+						<a href="#" class="list-group-item">Invite</a>
 					</div>
 				</div>
-			</a>
-			<%
-		}
-	}catch(Exception e) {
-		e.printStackTrace();
-	}finally {
-		if(rs != null) try{ rs.close(); }catch(Exception e) { e.printStackTrace(); }
-		if(pstmt != null) try{ pstmt.close(); }catch(Exception e) { e.printStackTrace(); }
-		if(conn != null) try{ conn.close(); }catch(Exception e) { e.printStackTrace(); }
-	}
-%>
+				<div class="col-lg-9">
+						<div class="card mt-4">
+						<%-- if(rs.next()) { --%>
+						  <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+						  <div class="card-body">
+							<h3 class="card-title"><%= rs.getString("title") %></h3>
+							<h4><%= rs.getTimestamp("starttime") %></h4>
+							<p class="card-text"><%= rs.getString("content") %></p>
+						  </div>
+						  <%--} --%>
+						</div>
+						<!-- /.card -->
+						
+						<div class="card card-outline-secondary my-4">
+						  <div class="card-header">
+							Comments
+							<form action="#" method="post">
+								<input type="text" name="comment" id="comment">
+								<input type="submit" value="SUBMIT">
+							</form>
+						  </div>
+						  <div class="card-body">
+						  
+<%--						ResultSet comments = CommentDAO.viewComment(boardid);
+						while(comments.next()) { --%>
+							<p><%-- = comments.getString("content")--%></p>
+							<small class="text-muted"><%-- = UserDAO.getUserName(comments.getInt("writerid")) --%></small>
+							<hr>
+<%--						}--%><a href="#" class="btn btn-success">Leave a Review</a>
+							</div>
+						</div>
+						<!-- /.card -->
 				</div>
 			</div>
 		</div>
-
-
 	</body>
 </html>

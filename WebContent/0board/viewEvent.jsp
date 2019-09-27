@@ -41,10 +41,10 @@
 					if(session.getAttribute("userEmail") == null){
 						%>
 					<li class="nav-item">
-						<a class="nav-link" href="0user/join.jsp">Join</a>
+						<a class="nav-link" href="../../0user/join.jsp">Join</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="0user/login.jsp">Log in</a>
+						<a class="nav-link" href="../../login.jsp">Log in</a>
 					</li>
 						<%
 					} else {
@@ -80,22 +80,36 @@
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="list-group">
-						<a href="#" class="list-group-item active">Volunteer</a>
-						<a href="#" class="list-group-item">Staff</a>
-						<a href="#" class="list-group-item">Invite</a>
+						<a href="#" class="list-group-item">
+							<p>Volunteer<p>
+							<div class="progress">
+							  <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+						</a>
+						<a href="#" class="list-group-item">
+							<p>Staff</p>
+							<div class="progress">
+							  <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+						</a>
+						<a href="#" class="list-group-item">
+							<p>Invite</p>
+							<div class="progress">
+							  <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+						</a>
 					</div>
 				</div>
 				<div class="col-lg-9">
 						<div class="card mt-4">
-						<%-- if(rs.next()) { --%>
-						  <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
+						  <img class="card-img-top img-fluid" src="../images/cat.jpg" style="height:400px; width:900px; object-fit:cover" alt="">
 						  <div class="card-body">
 							<h3 class="card-title"><%= rs.getString("title") %></h3>
 							<h4><%= rs.getTimestamp("starttime") %></h4>
 							<p class="card-text"><%= rs.getString("content") %></p>
 						  </div>
-						  <%--} --%>
 						</div>
+						
 						<!-- /.card -->
 						
 						<div class="card card-outline-secondary my-4">

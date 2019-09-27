@@ -41,10 +41,10 @@
 					if(session.getAttribute("userEmail") == null){
 						%>
 					<li class="nav-item">
-						<a class="nav-link" href="../../0user/join.jsp">Join</a>
+						<a class="nav-link" href="../0user/join.jsp">Join</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="../../login.jsp">Log in</a>
+						<a class="nav-link" href="../0user/login.jsp">Log in</a>
 					</li>
 						<%
 					} else {

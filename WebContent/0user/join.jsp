@@ -16,6 +16,9 @@
         .container {
             width: 500px;
             margin: 50px auto;
+            background-color: aliceblue;
+            padding: 50px;
+            border-radius: 20px;
         }
 </style>
 </head>
